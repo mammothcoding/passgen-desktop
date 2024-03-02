@@ -1,7 +1,7 @@
-# passgen-console-linuxwin
+# passgen-desktop
 
 ![alt text](./App_screen.png "passgen-console-linuxwin")
 
-Crossplatform password generator for console.
+Crossplatforming gui password generator.
 
-[Releases/Downloads](https://github.com/mammothcoding/passgen-console-linuxwin/releases/)
+[Releases/Downloads](https://github.com/mammothcoding/passgen-desktop/releases/)
