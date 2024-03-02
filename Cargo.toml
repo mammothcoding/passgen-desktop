@@ -1,0 +1,17 @@
+[package]
+name = "passgen-desktop"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.9.0-alpha.0"
+
+# Reduce the size of the executable  file:
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "z"
+panic = 'abort'
+strip = true
