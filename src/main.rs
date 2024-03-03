@@ -6,7 +6,7 @@ use eframe::egui;
 
 fn main() -> eframe::Result<()>  {
     eframe::run_native(
-        "calculator-wasm-rust-pwa",
+        "M-passgen",
         eframe::NativeOptions::default(),
         Box::new(|cc| Box::new(CalcApp::new(cc))),
     )

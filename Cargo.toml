@@ -26,3 +26,6 @@ codegen-units = 1
 opt-level = "z"
 panic = 'abort'
 strip = true
+
+[build-dependencies]
+windows_exe_info = "0.4"
