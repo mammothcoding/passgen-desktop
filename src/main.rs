@@ -23,11 +23,45 @@ impl CalcApp {
 impl eframe::App for CalcApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.label(r#"
-            Это вымышленный калькулятов.
-            Чтобы воспользоваться калькулятором вам необходимо воспользоваться воображением.            Представте себе любой интерфейс, наберите в нем математическое выражение и нажмите '='.
-            Увидели результат, Да? - Поздравляю, ваш калькулятор работает хорошо.
-            "#);
+            ui.label("Mammothcoding passgen");
+            ui.horizontal(|ui| {
+                let _ = ui.add_sized(
+                    [58.0, 48.0],
+                    egui::Button::new("√").small(),
+                );
+                let _ = ui.small_button("C");
+                let _ = ui.small_button("(");
+                let _ = ui.small_button(")");
+                let _ = ui.small_button("<=");
+            });
+            ui.horizontal(|ui| {
+                let _ = ui.small_button("sin");
+                let _ = ui.small_button("7");
+                let _ = ui.small_button("8");
+                let _ = ui.small_button("9");
+                let _ = ui.small_button("*");
+            });
+            ui.horizontal(|ui| {
+                let _ = ui.small_button("cos");
+                let _ = ui.small_button("4");
+                let _ = ui.small_button("5");
+                let _ = ui.small_button("6");
+                let _ = ui.small_button("/");
+            });
+            ui.horizontal(|ui| {
+                let _ = ui.small_button("tg");
+                let _ = ui.small_button("1");
+                let _ = ui.small_button("2");
+                let _ = ui.small_button("3");
+                let _ = ui.small_button("-");
+            });
+            ui.horizontal(|ui| {
+                let _ = ui.small_button("ctg");
+                let _ = ui.small_button(".");
+                let _ = ui.small_button("0");
+                let _ = ui.small_button("=");
+                let _ = ui.small_button("+");
+            });
         });
     }
 }
