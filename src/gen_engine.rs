@@ -35,7 +35,7 @@ pub mod gen_engine {
             }
 
             let pass_charset: Vec<u8> = pass_assembly.into_iter().flatten().cloned().collect();
-            (0..self.pwd_len.parse::<u32>().unwrap())
+            (0..self.pwd_len)
                 .map(|_| pass_charset[rng.gen_range(0..pass_charset.len())] as char)
                 .collect()
         }

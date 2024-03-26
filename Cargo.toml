@@ -9,7 +9,7 @@ authors = ["Mamontov Konstantin <k@mamont.xyz>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand = "0.9.0-alpha.0"
+rand = "*"
 eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }
 
 # web:
@@ -28,4 +28,9 @@ panic = 'abort'
 strip = true
 
 [build-dependencies]
-windows_exe_info = "0.4"
+windows_exe_info = "*"
+
+[dependencies.winit]
+# version = "*"
+version = "*"
+features = ["default"]

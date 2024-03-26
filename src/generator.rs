@@ -17,7 +17,7 @@ pub mod generator {
         pub let_num_drc_free: bool,
         pub cursor_position: usize,
         pub field_position: String,
-        pub pwd_len: String,
+        pub pwd_len: u32,
         pub min_pwd_len: u32,
         pub max_pwd_len: u32,
         pub pwd: String,
@@ -35,7 +35,7 @@ pub mod generator {
                 let_num_drc_free: true,
                 cursor_position: 1,
                 field_position: "pwd_len".to_string(),
-                pwd_len: "8".to_string(),
+                pwd_len: 8,
                 min_pwd_len: 4,
                 max_pwd_len: 10000,
                 pwd: "".to_string(),
@@ -147,16 +147,10 @@ pub mod generator {
         }*/
 
         fn is_valid_user_input(&self) -> bool {
-            let parse_res = self.pwd_len.parse::<u32>();
-            match parse_res {
-                Ok(val) => {
-                    if val < self.min_pwd_len || val > self.max_pwd_len {
-                        false
-                    } else {
-                        true
-                    }
-                }
-                Err(_err) => false,
+            if self.pwd_len < self.min_pwd_len || self.pwd_len > self.max_pwd_len {
+                false
+            } else {
+                true
             }
         }
     }
