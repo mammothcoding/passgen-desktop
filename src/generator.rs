@@ -1,4 +1,6 @@
 pub mod generator {
+    use std::process::{Command, Stdio};
+    use arboard::Clipboard;
 
     const CIRCUITED_FIELDS: [&str; 6] = [
         "pwd_len",
@@ -76,7 +78,7 @@ pub mod generator {
 
 
 
-        /*pub fn submit_to_pwd(&mut self) {
+        pub fn submit_to_pwd(&mut self) {
             if self.is_valid_user_input() {
                 let mut pwd = self.generate_pass();
                 while !self.is_valid_pwd_by_consist(pwd.clone()) {
@@ -144,7 +146,7 @@ pub mod generator {
                 self.field_position = "pwd_len".parse().unwrap();
                 self.pwd_len = "8".parse().unwrap();
             }
-        }*/
+        }
 
         fn is_valid_user_input(&self) -> bool {
             if self.pwd_len < self.min_pwd_len || self.pwd_len > self.max_pwd_len {
