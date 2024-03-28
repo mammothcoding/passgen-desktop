@@ -9,7 +9,11 @@ use crate::generator::generator::Generator;
 
 fn main() -> eframe::Result<()>  {
     let options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default().with_inner_size([480.0, 640.0]),
+        viewport: egui::ViewportBuilder::default()
+            .with_inner_size([480.0, 640.0])
+            .with_min_inner_size([480.0, 640.0])
+            .with_max_inner_size([480.0, 640.0])
+            .with_transparent(true),
         ..Default::default()
     };
 

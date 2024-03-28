@@ -1,13 +1,52 @@
 pub mod ui {
     use eframe::egui;
+    use eframe::egui::Direction;
     use crate::generator::generator::Generator;
 
     impl eframe::App for Generator {
         fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-            egui::CentralPanel::default().show(ctx, |ui| {
-                ui.heading("Mammothcoding passgen");
-                ui.separator();
 
+            // Title
+            egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
+                ui.with_layout(egui::Layout::centered_and_justified(Direction::TopDown), |ui| {
+                    ui.label(egui::RichText::new("Mammothcoding passgen")
+                        .heading()
+                        .color(egui::Color32::LIGHT_BLUE)
+                    );
+                });
+            });
+
+            // Footer
+            egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
+                ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                    egui::widgets::global_dark_light_mode_switch(ui);
+
+                    let footer_text = if self.lang.as_str() == "en" {
+                        "Made with RUST | 2024 | https://github.com/mammothcoding"
+                    } else {
+                        "Создано на языке RUST | 2024 | https://github.com/mammothcoding"
+                    };
+                    ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE)
+                    );
+
+                    // Lang indicator
+                    let ind_text = if self.lang.as_str() == "en" {
+                        egui::RichText::new("Ru").color(egui::Color32::BLACK)
+                    } else {
+                        egui::RichText::new("En").color(egui::Color32::BLACK)
+                    };
+                    let ind_btn = ui.add_sized(
+                        [20.0, 20.0],
+                        egui::Button::new(ind_text).small().rounding(egui::Rounding::same(60.0)),
+                    );
+                    if ind_btn.clicked() {
+                        self.switch_lang();
+                    };
+                });
+
+            });
+
+            egui::CentralPanel::default().show(ctx, |ui| {
                 // Password length area
                 let pass_len_label = ui.label("Password length:");
                 ui.add(egui::Slider::new(&mut self.pwd_len, 4..=20)).labelled_by(pass_len_label.id);
@@ -27,7 +66,6 @@ pub mod ui {
                 ).clicked() {
                     self.submit_to_pwd();
                 };
-                ui.separator();
 
                 // Password result area
                 let mut pwd = self.pwd.clone();
