@@ -6,9 +6,7 @@ mod gen_engine;
 mod ico;
 
 use std::{env};
-use std::io::Write;
 use eframe::egui;
-use image::{GenericImageView, Pixel};
 use crate::generator::generator::Generator;
 use crate::ico::ico::{ICO_PNG_PXL_DATA, gen_icon_from_png_pixels_data};
 

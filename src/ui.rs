@@ -18,7 +18,16 @@ pub mod ui {
 
             // Footer
             egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
-                ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                //ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                let la = egui::Layout {
+                    main_dir: Direction::LeftToRight,
+                    main_wrap: false,
+                    main_align: egui::Align::Center,
+                    main_justify: false,
+                    cross_align: egui::Align::Center,
+                    cross_justify: false,
+                };
+                ui.with_layout(la, |ui| {
                     egui::widgets::global_dark_light_mode_switch(ui);
 
                     let footer_text = if self.lang.as_str() == "en" {
@@ -43,7 +52,6 @@ pub mod ui {
                         self.switch_lang();
                     };
                 });
-
             });
 
             egui::CentralPanel::default().show(ctx, |ui| {
