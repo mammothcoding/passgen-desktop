@@ -18,16 +18,46 @@ pub mod ui {
 
             // Footer
             egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
-                //ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
-                let la = egui::Layout {
+                egui::Grid::new("bottom_table").num_columns(3).min_col_width(10.0).show(ui, |ui| {
+                    egui::widgets::global_dark_light_mode_switch(ui);
+
+                    let footer_text = if self.lang.as_str() == "en" {
+                        "Made with RUST | 2024 | https://github.com/mammothcoding"
+                    } else {
+                        "Создано на языке RUST | 2024 | https://github.com/mammothcoding"
+                    };
+                    ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE)
+                    );
+
+                    // Lang indicator
+                    let ind_text = if self.lang.as_str() == "en" {
+                        egui::RichText::new("Ru").color(egui::Color32::BLACK)
+                    } else {
+                        egui::RichText::new("En").color(egui::Color32::BLACK)
+                    };
+                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                        let ind_btn = ui.add_sized(
+                            [20.0, 20.0],
+                            egui::Button::new(ind_text).small().rounding(egui::Rounding::same(60.0)),
+                        );
+                        if ind_btn.clicked() {
+                            self.switch_lang();
+                        };
+                    });
+                });
+
+
+
+                /*ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                /*let la = egui::Layout {
                     main_dir: Direction::LeftToRight,
                     main_wrap: false,
                     main_align: egui::Align::Center,
                     main_justify: false,
                     cross_align: egui::Align::Center,
                     cross_justify: false,
-                };
-                ui.with_layout(la, |ui| {
+                };*/
+                //ui.with_layout(la, |ui| {
                     egui::widgets::global_dark_light_mode_switch(ui);
 
                     let footer_text = if self.lang.as_str() == "en" {
@@ -51,7 +81,7 @@ pub mod ui {
                     if ind_btn.clicked() {
                         self.switch_lang();
                     };
-                });
+                });*/
             });
 
             egui::CentralPanel::default().show(ctx, |ui| {

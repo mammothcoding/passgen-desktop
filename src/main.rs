@@ -15,9 +15,8 @@ fn main() -> eframe::Result<()>  {
 
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_inner_size([480.0, 640.0])
-            .with_min_inner_size([480.0, 640.0])
-            .with_max_inner_size([480.0, 640.0])
+            .with_min_inner_size([450.0, 400.0])
+            .with_max_inner_size([450.0, 400.0])
             .with_transparent(true)
             .with_icon(gen_icon_from_png_pixels_data(24, ICO_PNG_PXL_DATA)),
         ..Default::default()
