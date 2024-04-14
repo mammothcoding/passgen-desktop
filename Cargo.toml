@@ -11,9 +11,9 @@ build = "build.rs"
 
 [dependencies]
 rand = "*"
-eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }
+eframe = { version = "*", default-features = true }#, features = ["default_fonts", "wayland", "persistence"] }
 arboard = "*"
-image = "0.25.0"
+image = "*"
 
 # web:
 [target.'cfg(target_arch = "wasm32")'.dependencies]
@@ -21,6 +21,8 @@ console_error_panic_hook = "0.1.7"
 tracing-wasm = "0.2"
 wasm-bindgen-futures = "0.4"
 
+[target.'cfg(target_arch = "windows")'.dependencies]
+eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }
 
 # Reduce the size of the executable  file:
 [profile.release]

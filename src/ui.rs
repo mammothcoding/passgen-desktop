@@ -17,7 +17,7 @@ pub mod ui {
             });
 
             // Footer
-            egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
+            /*egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
                 egui::Grid::new("bottom_table").num_columns(3).min_col_width(10.0).show(ui, |ui| {
                     egui::widgets::global_dark_light_mode_switch(ui);
 
@@ -26,8 +26,9 @@ pub mod ui {
                     } else {
                         "Создано на языке RUST | 2024 | https://github.com/mammothcoding"
                     };
-                    ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE)
-                    );
+                    ui.with_layout(egui::Layout::centered_and_justified(Direction::RightToLeft), |ui| {
+                        ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE));
+                    });
 
                     // Lang indicator
                     let ind_text = if self.lang.as_str() == "en" {
@@ -35,7 +36,7 @@ pub mod ui {
                     } else {
                         egui::RichText::new("En").color(egui::Color32::BLACK)
                     };
-                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                    ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
                         let ind_btn = ui.add_sized(
                             [20.0, 20.0],
                             egui::Button::new(ind_text).small().rounding(egui::Rounding::same(60.0)),
@@ -44,7 +45,7 @@ pub mod ui {
                             self.switch_lang();
                         };
                     });
-                });
+                });*/
 
 
 
@@ -82,7 +83,7 @@ pub mod ui {
                         self.switch_lang();
                     };
                 });*/
-            });
+            //});
 
             egui::CentralPanel::default().show(ctx, |ui| {
                 // Password length area

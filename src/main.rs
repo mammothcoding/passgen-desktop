@@ -15,15 +15,17 @@ fn main() -> eframe::Result<()>  {
 
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_min_inner_size([450.0, 400.0])
-            .with_max_inner_size([450.0, 400.0])
+            .with_inner_size([400.0, 400.0])
+            //.with_min_inner_size([200.0, 200.0])
+            //.with_max_inner_size([200.0, 200.0])
+            .with_resizable(true)
             .with_transparent(true)
-            .with_icon(gen_icon_from_png_pixels_data(24, ICO_PNG_PXL_DATA)),
+            .with_icon(gen_icon_from_png_pixels_data(24, ICO_PNG_PXL_DATA)), //for X11 and mac, not for wayland programmaticaly way
         ..Default::default()
     };
 
     eframe::run_native(
-        "M-passgen",
+        "Mc passgen",
         options,
         Box::new(|_| Box::new(Generator::default())),
     )
