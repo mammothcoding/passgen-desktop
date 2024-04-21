@@ -1,6 +1,7 @@
 pub mod ui {
     use eframe::egui;
-    use eframe::egui::Direction;
+    use eframe::egui::{Direction, Widget};
+    use egui_extras::{Column, TableBuilder};
     use crate::generator::generator::Generator;
 
     impl eframe::App for Generator {
@@ -17,6 +18,50 @@ pub mod ui {
             });
 
             // Footer
+            egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
+                TableBuilder::new(ui)
+                    .column(Column::initial(10.0))
+                    .column(Column::remainder())
+                    .column(Column::initial(10.0))
+                    .body(|mut body| {
+                        body.row(25.0, |mut row| {
+                            row.col(|ui| {
+                                ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                                    egui::widgets::global_dark_light_mode_switch(ui);
+                                });
+                            });
+                            row.col(|ui| {
+                                let footer_text = if self.lang.as_str() == "en" {
+                                    "Made with RUST | 2024 | https://github.com/mammothcoding"
+                                } else {
+                                    "Создано на языке RUST | 2024 | https://github.com/mammothcoding"
+                                };
+                                ui.with_layout(egui::Layout::centered_and_justified(Direction::LeftToRight), |ui| {
+                                    ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE));
+                                });
+                            });
+                            row.col(|ui| {
+                                // Lang indicator
+                                let ind_text = if self.lang.as_str() == "en" {
+                                    egui::RichText::new("Ru").color(egui::Color32::WHITE)
+                                } else {
+                                    egui::RichText::new("En").color(egui::Color32::WHITE)
+                                };
+                                ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                                    let ind_btn = ui.add_sized(
+                                        [20.0, 20.0],
+                                        egui::Button::new(ind_text).small().rounding(egui::Rounding::same(60.0)).fill(egui::Color32::from_rgb(0, 115, 153)),
+                                    );
+                                    if ind_btn.clicked() {
+                                        self.switch_lang();
+                                    };
+                                });
+                            });
+                        });
+                    });
+            });
+
+
             /*egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
                 egui::Grid::new("bottom_table").num_columns(3).min_col_width(10.0).show(ui, |ui| {
                     egui::widgets::global_dark_light_mode_switch(ui);

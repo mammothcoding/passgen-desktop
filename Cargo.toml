@@ -12,6 +12,7 @@ build = "build.rs"
 [dependencies]
 rand = "*"
 eframe = { version = "*", default-features = true }#, features = ["default_fonts", "wayland", "persistence"] }
+egui_extras = "*"
 arboard = "*"
 image = "*"
 
@@ -33,10 +34,8 @@ panic = 'abort'
 strip = true
 
 [build-dependencies]
-windows_exe_info = "*"
-image = "*"
+#windows_exe_info = "*"
 
-[dependencies.winit]
-# version = "*"
-version = "*"
-features = ["default"]
+#[dependencies.winit]
+#version = "*"
+#features = ["default"]
