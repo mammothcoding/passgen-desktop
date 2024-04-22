@@ -9,7 +9,7 @@ pub mod ui {
 
             // Title
             egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
-                ui.with_layout(egui::Layout::centered_and_justified(Direction::TopDown), |ui| {
+                ui.with_layout(egui::Layout::centered_and_justified(Direction::LeftToRight), |ui| {
                     ui.label(egui::RichText::new("Mammothcoding passgen")
                         .heading()
                         .color(egui::Color32::LIGHT_BLUE)
@@ -25,23 +25,31 @@ pub mod ui {
                     .column(Column::initial(10.0))
                     .body(|mut body| {
                         body.row(25.0, |mut row| {
+
+                            // Dark-light switcher
                             row.col(|ui| {
                                 ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
                                     egui::widgets::global_dark_light_mode_switch(ui);
                                 });
                             });
+
+                            // Central bottom text
                             row.col(|ui| {
                                 let footer_text = if self.lang.as_str() == "en" {
-                                    "Made with RUST | 2024 | https://github.com/mammothcoding"
+                                    "Homepage: https://github.com/mammothcoding"
                                 } else {
-                                    "Создано на языке RUST | 2024 | https://github.com/mammothcoding"
+                                    "Домашняя страница: https://github.com/mammothcoding"
                                 };
                                 ui.with_layout(egui::Layout::centered_and_justified(Direction::LeftToRight), |ui| {
-                                    ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE));
+                                    //let lab = ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE));
+                                    let hyp = egui::Hyperlink::from_label_and_url(footer_text, "https://github.com/mammothcoding")
+                                        .open_in_new_tab(true);
+                                    ui.add(hyp);
                                 });
                             });
+
+                            // Lang indicator
                             row.col(|ui| {
-                                // Lang indicator
                                 let ind_text = if self.lang.as_str() == "en" {
                                     egui::RichText::new("Ru").color(egui::Color32::WHITE)
                                 } else {
@@ -132,8 +140,13 @@ pub mod ui {
 
             egui::CentralPanel::default().show(ctx, |ui| {
                 // Password length area
-                let pass_len_label = ui.label("Password length:");
-                ui.add(egui::Slider::new(&mut self.pwd_len, 4..=20)).labelled_by(pass_len_label.id);
+                ui.vertical(|ui| {
+                    ui.spacing_mut().slider_width = 200.0;
+                    let pass_len_label = ui.label("Password length:");
+                    let sli = egui::Slider::new(&mut self.pwd_len, 4..=10000).logarithmic(true);
+                    ui.add(sli).labelled_by(pass_len_label.id);
+                });
+
 
                 // Rules
                 ui.checkbox(&mut self.letters, "include lowercase letters");
@@ -141,15 +154,16 @@ pub mod ui {
                 ui.checkbox(&mut self.numbs, "include numbers");
                 ui.checkbox(&mut self.spec_symbs, "include special symbols");
                 ui.checkbox(&mut self.let_num_drc_free, "all nums & letters exclude \"0oOiIlL1\"");
+
                 ui.separator();
 
                 // Gen button
-                if ui.add_sized(
-                    [90.0, 30.0],
-                    egui::Button::new("generate").small(),
-                ).clicked() {
-                    self.submit_to_pwd();
-                };
+                ui.vertical_centered(|ui| {
+                    if ui.add_sized([100.0, 35.0], egui::Button::new("GENERATE").small())
+                        .clicked() {
+                        self.submit_to_pwd();
+                    };
+                });
 
                 // Password result area
                 let mut pwd = self.pwd.clone();
