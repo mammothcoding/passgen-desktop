@@ -96,10 +96,11 @@ pub mod ui {
 
                             // Gen button
                             row.col(|ui| {
-                                ui.with_layout(egui::Layout::centered_and_justified(Direction::LeftToRight), |ui| {
-                                    if ui.add_sized([100.0, 35.0], egui::Button::new(
-                                        egui::RichText::new("GENERATE")
+                                ui.horizontal_centered(|ui| {
+                                    if ui.add_sized([100.0, 45.0], egui::Button::new(
+                                        egui::RichText::new("GENERATE\n(press Enter)")
                                             .color(egui::Color32::LIGHT_GRAY)
+                                            .strong()
                                         ).small()
                                     )
                                         .clicked() {
@@ -135,14 +136,14 @@ pub mod ui {
                     ui.vertical_centered(|ui| {
                         ui.add(egui::Label::new(
                             egui::RichText::new(text)
-                                .font(egui::FontId::monospace(12.0))
+                                .font(egui::FontId::monospace(10.0))
                                 .color(egui::Color32::LIGHT_GRAY)
                         ));
                         ui.separator();
 
                         ui.add(egui::Label::new(
                             egui::RichText::new(pwd)
-                                .font(egui::FontId::monospace(28.0))
+                                .font(egui::FontId::monospace(32.0))
                                 .color(egui::Color32::LIGHT_YELLOW)
                                 .strong()
                         ));
