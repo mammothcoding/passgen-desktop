@@ -1,6 +1,6 @@
 pub mod generator {
-    use std::process::{Command, Stdio};
     use arboard::Clipboard;
+    use std::process::{Command, Stdio};
 
     const CIRCUITED_FIELDS: [&str; 6] = [
         "pwd_len",
@@ -76,8 +76,6 @@ pub mod generator {
             }
         }
 
-
-
         pub fn submit_to_pwd(&mut self) {
             if self.is_valid_user_input() {
                 let mut pwd = self.generate_pass();
@@ -98,7 +96,11 @@ pub mod generator {
                             "При вставке в буфер обмена произошла ошибка echo!".to_string(),
                         );
                     } else {
-                        let pipe_out = pipe.unwrap().stdout.take().expect("Failed to take pipe stdout!");
+                        let pipe_out = pipe
+                            .unwrap()
+                            .stdout
+                            .take()
+                            .expect("Failed to take pipe stdout!");
                         let out = Command::new("xclip")
                             .arg("-selection")
                             .arg("clipboard")
@@ -107,7 +109,8 @@ pub mod generator {
                         if let Err(_err) = &out {
                             self.errors = (
                                 "\'xclip\' packet needed for copy to clipbord!".to_string(),
-                                "Для вставки в буфер обмена установите пакет \'xclip\'!".to_string(),
+                                "Для вставки в буфер обмена установите пакет \'xclip\'!"
+                                    .to_string(),
                             );
                         } else {
                             let owait = out.unwrap().wait();
@@ -128,9 +131,7 @@ pub mod generator {
                             "Ошибка копирования в буфер обмена!".to_string(),
                         );
                     } else {
-                        let clip = clipboard
-                            .unwrap()
-                            .set_text(self.pwd.clone());
+                        let clip = clipboard.unwrap().set_text(self.pwd.clone());
                         if let Err(_err) = &clip {
                             self.errors = (
                                 "Copy to clipboard error!".to_string(),
