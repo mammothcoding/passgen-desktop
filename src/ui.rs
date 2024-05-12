@@ -4,7 +4,7 @@ pub mod ui {
     use eframe::{egui, epaint};
     use eframe::egui::text::LayoutJob;
     use eframe::egui::WidgetText::RichText;
-    use eframe::egui::{Align, Direction, FontSelection, Style, TextureOptions, Widget};
+    use eframe::egui::{Align, Direction, FontSelection, Key, Style, TextureOptions, Widget};
     use eframe::epaint::text::Row;
     use egui_extras::{Column, TableBuilder};
     use std::sync::Arc;
@@ -160,26 +160,26 @@ pub mod ui {
                                     let mut layout_job = LayoutJob::default();
 
                                     egui::widget_text::RichText::new("GENERATE\n")
-                                        .font(egui::FontId::monospace(17.0))
+                                        .font(egui::FontId::monospace(16.0))
                                         .color(egui::Color32::LIGHT_BLUE)
                                         .append_to(
                                             &mut layout_job,
                                             &style,
                                             FontSelection::Default,
-                                            Align::Center,
+                                            Center,
                                         );
-                                    egui::widget_text::RichText::new("       (press Enter)")
+                                    egui::widget_text::RichText::new("(press Enter)")
                                         .font(egui::FontId::monospace(10.0))
                                         .append_to(
                                             &mut layout_job,
                                             &style,
                                             FontSelection::Default,
-                                            Align::Center,
+                                            Center,
                                         );
 
                                     if ui
                                         .add_sized(
-                                            [100.0, 45.0],
+                                            [110.0, 45.0],
                                             egui::Button::new(layout_job).rounding(
                                                 egui::Rounding {
                                                     nw: 12.0,
@@ -248,6 +248,14 @@ pub mod ui {
                                 .color(egui::Color32::DARK_GRAY),
                         ));
                     });
+                }
+
+                // Keyboard events
+                if ctx.input(|i| i.key_pressed(Key::Enter)) {
+                    self.submit_to_pwd();
+                }
+                if ctx.input(|i| i.key_pressed(Key::Escape)) {
+                    ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
                 }
             });
         }
