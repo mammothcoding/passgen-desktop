@@ -32,7 +32,8 @@ fn main() -> eframe::Result<()> {
         //Box::new(|_| Box::new(Generator::default())),
         Box::new(|cc| {
             egui_extras::install_image_loaders(&cc.egui_ctx);// This gives us image support:
-            Box::<Generator>::default()
+            //Box::<Generator>::default()
+            Box::new(Generator::default())
         }),
     )
 }
