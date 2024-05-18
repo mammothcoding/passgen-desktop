@@ -10,6 +10,7 @@ use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
 mod gen_engine;
 mod generator;
 mod ico;
+mod text_processor;
 mod ui;
 
 fn main() -> eframe::Result<()> {
@@ -31,8 +32,8 @@ fn main() -> eframe::Result<()> {
         options,
         //Box::new(|_| Box::new(Generator::default())),
         Box::new(|cc| {
-            egui_extras::install_image_loaders(&cc.egui_ctx);// This gives us image support:
-            //Box::<Generator>::default()
+            egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support:
+                                                              //Box::<Generator>::default()
             Box::new(Generator::default())
         }),
     )

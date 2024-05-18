@@ -1,18 +1,20 @@
 pub mod ui {
-    use std::any::Any;
     use crate::generator::generator::Generator;
-    use eframe::{egui, epaint};
-    use eframe::egui::text::LayoutJob;
-    use eframe::egui::WidgetText::RichText;
-    use eframe::egui::{Align, Color32, Direction, FontSelection, Key, Style, TextureOptions, Widget};
-    use eframe::epaint::text::Row;
-    use egui_extras::{Column, TableBuilder};
-    use std::sync::Arc;
-    use eframe::egui::Align::Center;
-    use eframe::egui::load::SizedTexture;
-    use eframe::epaint::{ColorImage, TextureId, Vec2};
-    use image::RgbImage;
     use crate::ico::ico::ICO_PNG_PXL_DATA;
+    use eframe::egui::load::SizedTexture;
+    use eframe::egui::text::LayoutJob;
+    use eframe::egui::Align::Center;
+    use eframe::egui::WidgetText::RichText;
+    use eframe::egui::{
+        Align, Color32, Direction, FontSelection, Key, Style, TextureOptions, Widget,
+    };
+    use eframe::epaint::text::Row;
+    use eframe::epaint::{ColorImage, TextureId, Vec2};
+    use eframe::{egui, epaint};
+    use egui_extras::{Column, TableBuilder};
+    use image::RgbImage;
+    use std::any::Any;
+    use std::sync::Arc;
 
     impl eframe::App for Generator {
         fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
@@ -41,7 +43,8 @@ pub mod ui {
                             // Label image
                             row.col(|ui| {
                                 // this is hardcoding image to binary file
-                                ui.image(egui::include_image!("../icon_24x24.png"));
+                                ui.image(egui::include_image!("../icon_24x24.png"))
+                                    .on_hover_text("Mammothcoding passgen");
                             });
 
                             // Central bottom text
@@ -75,13 +78,15 @@ pub mod ui {
                                 ui.with_layout(
                                     egui::Layout::right_to_left(egui::Align::Center),
                                     |ui| {
-                                        let ind_btn = ui.add_sized(
-                                            [20.0, 20.0],
-                                            egui::Button::new(ind_text)
-                                                .small()
-                                                .rounding(egui::Rounding::same(60.0))
-                                                .fill(egui::Color32::from_rgb(0, 115, 153)),
-                                        );
+                                        let ind_btn = ui
+                                            .add_sized(
+                                                [20.0, 20.0],
+                                                egui::Button::new(ind_text)
+                                                    .small()
+                                                    .rounding(egui::Rounding::same(60.0))
+                                                    .fill(egui::Color32::from_rgb(0, 115, 153)),
+                                            )
+                                            .on_hover_text("Language switcher");
                                         if ind_btn.clicked() {
                                             self.switch_lang();
                                         };
@@ -156,6 +161,7 @@ pub mod ui {
                                                 },
                                             ),
                                         )
+                                        .on_hover_text("Generate a password")
                                         .clicked()
                                     {
                                         self.submit_to_pwd();
