@@ -12,9 +12,9 @@ build = "build.rs"
 [dependencies]
 rand = "*"
 eframe = { version = "*", default-features = true }#, features = ["default_fonts", "wayland", "persistence"] }
-egui_extras = "*"
+egui_extras = { version = "*", features = ["all_loaders"] }
 arboard = "*"
-image = "*"
+image = { version = "*", features = ["jpeg", "png"] }
 
 # web:
 [target.'cfg(target_arch = "wasm32")'.dependencies]

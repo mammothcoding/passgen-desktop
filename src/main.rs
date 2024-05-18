@@ -1,14 +1,16 @@
 //#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
+use std::env;
+
+use eframe::egui;
+
+use crate::generator::generator::Generator;
+use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
+
 mod gen_engine;
 mod generator;
 mod ico;
 mod ui;
-
-use crate::generator::generator::Generator;
-use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
-use eframe::egui;
-use std::env;
 
 fn main() -> eframe::Result<()> {
     env::set_var("RUST_BACKTRACE", "full");
@@ -25,8 +27,12 @@ fn main() -> eframe::Result<()> {
     };
 
     eframe::run_native(
-        "Mc passgen",
+        "McPassgen",
         options,
-        Box::new(|_| Box::new(Generator::default())),
+        //Box::new(|_| Box::new(Generator::default())),
+        Box::new(|cc| {
+            egui_extras::install_image_loaders(&cc.egui_ctx);// This gives us image support:
+            Box::<Generator>::default()
+        }),
     )
 }

@@ -4,7 +4,7 @@ pub mod ui {
     use eframe::{egui, epaint};
     use eframe::egui::text::LayoutJob;
     use eframe::egui::WidgetText::RichText;
-    use eframe::egui::{Align, Direction, FontSelection, Key, Style, TextureOptions, Widget};
+    use eframe::egui::{Align, Color32, Direction, FontSelection, Key, Style, TextureOptions, Widget};
     use eframe::epaint::text::Row;
     use egui_extras::{Column, TableBuilder};
     use std::sync::Arc;
@@ -38,43 +38,10 @@ pub mod ui {
                     .column(Column::initial(10.0))
                     .body(|mut body| {
                         body.row(25.0, |mut row| {
-                            // Dark-light switcher
+                            // Label image
                             row.col(|ui| {
-                                /*ui.with_layout(
-                                    egui::Layout::left_to_right(egui::Align::Center),
-                                    |ui| {
-                                        egui::widgets::global_dark_light_mode_switch(ui);
-                                    },
-                                );*/
-
-                                let mut imgbuf = image::ImageBuffer::new(24, 24);
-                                for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
-                                    let r = ICO_PNG_PXL_DATA[((x + y * 24) * 4) as usize] as u8;
-                                    let g = ICO_PNG_PXL_DATA[((x + y * 24) * 4 + 1) as usize] as u8;
-                                    let b = ICO_PNG_PXL_DATA[((x + y * 24) * 4 + 2) as usize] as u8;
-                                    let a = ICO_PNG_PXL_DATA[((x + y * 24) * 4 + 3) as usize] as u8;
-                                    *pixel = image::Rgba([r, g, b, a]);
-                                }
-                                //let rgba = imgbuf.into_raw();
-                                let mut img = ColorImage::from_rgba_premultiplied(
-                                    [24, 24],
-                                    imgbuf.as_flat_samples().as_slice(),
-                                );
-                                let img_data = epaint::image::ImageData::Color(Arc::from(img));
-                                let mut texture_man = epaint::textures::TextureManager::default();
-                                let texture_id = texture_man.alloc("mcp".parse().unwrap(), img_data, TextureOptions::default());
-                                let sized_texture = SizedTexture {
-                                    id: texture_id,
-                                    size: Vec2 {
-                                        x: 24.0,
-                                        y: 24.0,
-                                    },
-                                };
-
-                                ui.add(
-                                    egui::Image::from_texture(sized_texture)
-                                );
-
+                                // this is hardcoding image to binary file
+                                ui.image(egui::include_image!("../icon_24x24.png"));
                             });
 
                             // Central bottom text

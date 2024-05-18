@@ -11,6 +11,7 @@ pub mod generator {
         "let_num_drc_free",
     ];
 
+    #[derive(Default)]
     pub struct Generator {
         pub letters: bool,
         pub u_letters: bool,
