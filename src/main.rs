@@ -1,7 +1,7 @@
 //#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
 use std::env;
-
+use std::collections::HashMap;
 use eframe::egui;
 
 use crate::generator::generator::Generator;

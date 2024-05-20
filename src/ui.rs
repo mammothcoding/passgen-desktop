@@ -1,20 +1,12 @@
 pub mod ui {
     use crate::generator::generator::Generator;
-    use crate::ico::ico::ICO_PNG_PXL_DATA;
-    use eframe::egui::load::SizedTexture;
     use eframe::egui::text::LayoutJob;
     use eframe::egui::Align::Center;
-    use eframe::egui::WidgetText::RichText;
     use eframe::egui::{
-        Align, Color32, Direction, FontSelection, Key, Style, TextureOptions, Widget,
+        Direction, FontSelection, Key, Style, TextureOptions, Widget,
     };
-    use eframe::epaint::text::Row;
-    use eframe::epaint::{ColorImage, TextureId, Vec2};
-    use eframe::{egui, epaint};
+    use eframe::{egui};
     use egui_extras::{Column, TableBuilder};
-    use image::RgbImage;
-    use std::any::Any;
-    use std::sync::Arc;
 
     impl eframe::App for Generator {
         fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
@@ -39,7 +31,7 @@ pub mod ui {
                     .column(Column::remainder())
                     .column(Column::initial(10.0))
                     .body(|mut body| {
-                        body.row(25.0, |mut row| {
+                        body.row(24.0, |mut row| {
                             // Label image
                             row.col(|ui| {
                                 // this is hardcoding image to binary file
@@ -108,7 +100,8 @@ pub mod ui {
                                 // Password length area
                                 ui.vertical(|ui| {
                                     ui.spacing_mut().slider_width = 200.0;
-                                    let pass_len_label = ui.label("Password length:");
+                                    //let pass_len_label = ui.label("Password length:");
+                                    let pass_len_label = ui.label(self.get_text("pass_len"));
                                     let sli = egui::Slider::new(&mut self.pwd_len, 4..=10000)
                                         .logarithmic(true);
                                     ui.add(sli).labelled_by(pass_len_label.id);
