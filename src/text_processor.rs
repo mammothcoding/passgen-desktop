@@ -1,16 +1,7 @@
 pub mod text_processor {
-    use std::collections::HashMap;
     use crate::generator::generator::Generator;
 
-    /*pub struct TextProcessor {
-        pub pass_len: str,
-        pub inc_lcase: str,
-        pub inc_cap: str,
-    }
-*/
-
-
-    let en_text: HashMap<&str, &str> = HashMap::from([
+    pub(crate) const EN: [(&str, &str); 13] = [
         ("pass_len", "Password length:"),
         ("inc_lcase", "include lowercase letters"),
         ("inc_cap", "include capital letters"),
@@ -24,9 +15,9 @@ pub mod text_processor {
         ("to_clip", "this password was copied to clipboard"),
         ("homepage", "Homepage: https://github.com/mammothcoding"),
         ("lang_ttip", "Interface language switcher"),
-    ]);
+    ];
 
-    const RU: HashMap<&str, &str> = HashMap::from([
+    pub(crate) const RU: [(&str, &str); 13] = [
         ("pass_len", "Длина пароля:"),
         ("inc_lcase", "включая маленькие буквы"),
         ("inc_cap", "включая заглавные буквы"),
@@ -40,19 +31,20 @@ pub mod text_processor {
         ("to_clip", "пароль был скопирован в буфер обмена"),
         ("homepage", "Домашняя страница: https://github.com/mammothcoding"),
         ("lang_ttip", "Переключатель языка интерфейса"),
-    ]);
+    ];
 
     impl Generator {
-        pub fn get_text(&self, text_id: &str) -> String
+        pub fn get_lang_text(&self, text_id: &str) -> String
         {
-            let en = "en".to_string();
-            let ru = "ru".to_string();
+            let lang_name: String = self.lang.clone().to_owned();
+            let lang_name_slice: &str = &lang_name[..];
 
-            let res = match &self.lang {
-                en => EN.get(text_id),
-                ru => RU.get(text_id),
+            let res = match lang_name_slice {
+                "ru" => self.ru_texts.get(text_id),
+                _ => self.en_texts.get(text_id),
             };
-            return res.unwrap().to_string();
+
+            res.unwrap().to_string()
         }
     }
 }

@@ -41,17 +41,12 @@ pub mod ui {
 
                             // Central bottom text
                             row.col(|ui| {
-                                let footer_text = if self.lang.as_str() == "en" {
-                                    "Homepage: https://github.com/mammothcoding"
-                                } else {
-                                    "Домашняя страница: https://github.com/mammothcoding"
-                                };
                                 ui.with_layout(
                                     egui::Layout::centered_and_justified(Direction::LeftToRight),
                                     |ui| {
                                         //let lab = ui.label(egui::RichText::new(footer_text).color(egui::Color32::LIGHT_BLUE));
                                         let hyp = egui::Hyperlink::from_label_and_url(
-                                            footer_text,
+                                            self.get_lang_text("homepage"),
                                             "https://github.com/mammothcoding",
                                         )
                                         .open_in_new_tab(true);
@@ -78,7 +73,7 @@ pub mod ui {
                                                     .rounding(egui::Rounding::same(60.0))
                                                     .fill(egui::Color32::from_rgb(0, 115, 153)),
                                             )
-                                            .on_hover_text("Language switcher");
+                                            .on_hover_text(self.get_lang_text("lang_ttip"));
                                         if ind_btn.clicked() {
                                             self.switch_lang();
                                         };
@@ -101,21 +96,24 @@ pub mod ui {
                                 ui.vertical(|ui| {
                                     ui.spacing_mut().slider_width = 200.0;
                                     //let pass_len_label = ui.label("Password length:");
-                                    let pass_len_label = ui.label(self.get_text("pass_len"));
+                                    let pass_len_label = ui.label(self.get_lang_text("pass_len"));
                                     let sli = egui::Slider::new(&mut self.pwd_len, 4..=10000)
                                         .logarithmic(true);
                                     ui.add(sli).labelled_by(pass_len_label.id);
                                 });
 
                                 // Rules
-                                ui.checkbox(&mut self.letters, "include lowercase letters");
-                                ui.checkbox(&mut self.u_letters, "include capital letters");
-                                ui.checkbox(&mut self.numbs, "include numbers");
-                                ui.checkbox(&mut self.spec_symbs, "include special symbols");
-                                ui.checkbox(
-                                    &mut self.let_num_drc_free,
-                                    "all nums & letters exclude \"0oOiIlL1\"",
-                                );
+                                let t_letters = self.get_lang_text("inc_lcase");
+                                let t_u_letters = self.get_lang_text("inc_cap");
+                                let t_numbs = self.get_lang_text("inc_num");
+                                let t_spec_symbs = self.get_lang_text("inc_ss");
+                                let t_let_num_drc_free = self.get_lang_text("inc_all_ex");
+
+                                ui.checkbox(&mut self.letters, t_letters);
+                                ui.checkbox(&mut self.u_letters, t_u_letters);
+                                ui.checkbox(&mut self.numbs, t_numbs);
+                                ui.checkbox(&mut self.spec_symbs, t_spec_symbs);
+                                ui.checkbox(&mut self.let_num_drc_free, t_let_num_drc_free);
                             });
 
                             // Gen button
@@ -124,7 +122,7 @@ pub mod ui {
                                     let style = Style::default();
                                     let mut layout_job = LayoutJob::default();
 
-                                    egui::widget_text::RichText::new("GENERATE\n")
+                                    egui::widget_text::RichText::new(self.get_lang_text("but_gen_gen"))
                                         .font(egui::FontId::monospace(16.0))
                                         .color(egui::Color32::LIGHT_BLUE)
                                         .append_to(
@@ -133,7 +131,7 @@ pub mod ui {
                                             FontSelection::Default,
                                             Center,
                                         );
-                                    egui::widget_text::RichText::new("(press Enter)")
+                                    egui::widget_text::RichText::new(self.get_lang_text("but_gen_press"))
                                         .font(egui::FontId::monospace(10.0))
                                         .append_to(
                                             &mut layout_job,
@@ -154,7 +152,7 @@ pub mod ui {
                                                 },
                                             ),
                                         )
-                                        .on_hover_text("Generate a password")
+                                        .on_hover_text(self.get_lang_text("but_ttip"))
                                         .clicked()
                                     {
                                         self.submit_to_pwd();
@@ -172,23 +170,9 @@ pub mod ui {
                     pwd = format!("{}...", &pwd[..15].to_string());
                 }
                 if self.pwd != "" {
-                    let text: String = if self.lang.as_str() == "en" {
-                        if self.errors.0 != "" {
-                            self.errors.0.clone()
-                        } else {
-                            "this password was copied to clipboard".to_string()
-                        }
-                    } else {
-                        if self.errors.1 != "" {
-                            self.errors.1.clone()
-                        } else {
-                            "пароль был скопирован в буфер обмена".to_string()
-                        }
-                    };
-
                     ui.vertical_centered(|ui| {
                         ui.add(egui::Label::new(
-                            egui::RichText::new(text)
+                            egui::RichText::new(self.get_lang_text("to_clip"))
                                 .font(egui::FontId::monospace(10.0))
                                 .color(egui::Color32::LIGHT_GRAY),
                         ));
@@ -209,7 +193,7 @@ pub mod ui {
                 } else {
                     ui.with_layout(egui::Layout::bottom_up(Center), |ui| {
                         ui.add(egui::Label::new(
-                            egui::RichText::new("Made with Rust")
+                            egui::RichText::new(self.get_lang_text("made_rust"))
                                 .font(egui::FontId::monospace(9.0))
                                 .color(egui::Color32::DARK_GRAY),
                         ));

@@ -1,6 +1,8 @@
 pub mod generator {
+    use std::collections::HashMap;
     use arboard::Clipboard;
     use std::process::{Command, Stdio};
+    use crate::text_processor::text_processor::{EN, RU};
 
     const CIRCUITED_FIELDS: [&str; 6] = [
         "pwd_len",
@@ -18,13 +20,13 @@ pub mod generator {
         pub numbs: bool,
         pub spec_symbs: bool,
         pub let_num_drc_free: bool,
-        pub cursor_position: usize,
-        pub field_position: String,
         pub pwd_len: u32,
         pub min_pwd_len: u32,
         pub max_pwd_len: u32,
         pub pwd: String,
         pub lang: String,
+        pub en_texts: HashMap<&'static str, &'static str>,
+        pub ru_texts: HashMap<&'static str, &'static str>,
         pub errors: (String, String),
     }
 
@@ -36,13 +38,13 @@ pub mod generator {
                 numbs: false,
                 spec_symbs: true,
                 let_num_drc_free: true,
-                cursor_position: 1,
-                field_position: "pwd_len".to_string(),
                 pwd_len: 8,
                 min_pwd_len: 4,
                 max_pwd_len: 10000,
                 pwd: "".to_string(),
                 lang: "en".to_string(),
+                en_texts: HashMap::from(EN),
+                ru_texts: HashMap::from(RU),
                 errors: ("".to_string(), "".to_string()),
             }
         }
@@ -144,8 +146,6 @@ pub mod generator {
                     }
                 }
             } else {
-                self.cursor_position = 1;
-                self.field_position = "pwd_len".parse().unwrap();
                 self.pwd_len = "8".parse().unwrap();
             }
         }
