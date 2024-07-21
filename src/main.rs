@@ -1,7 +1,6 @@
 //#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
-use std::env;
-use std::collections::HashMap;
+//use std::env;
 use eframe::egui;
 
 use crate::generator::generator::Generator;
@@ -14,7 +13,7 @@ mod text_processor;
 mod ui;
 
 fn main() -> eframe::Result<()> {
-    env::set_var("RUST_BACKTRACE", "full");
+    //env::set_var("RUST_BACKTRACE", "full");
 
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()

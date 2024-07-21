@@ -1,7 +1,7 @@
 pub mod generator {
     use std::collections::HashMap;
-    use arboard::Clipboard;
-    use std::process::{Command, Stdio};
+    //use arboard::Clipboard;
+    //use std::process::{Command, Stdio};
     use crate::text_processor::text_processor::{EN, RU};
 
     const CIRCUITED_FIELDS: [&str; 6] = [
@@ -87,7 +87,7 @@ pub mod generator {
                 }
                 self.pwd = pwd;
 
-                if cfg!(unix) {
+                /*if cfg!(unix) {
                     let pipe = Command::new("echo")
                         .arg("-n")
                         .arg(self.pwd.clone())
@@ -144,7 +144,7 @@ pub mod generator {
                             clip.unwrap();
                         }
                     }
-                }
+                }*/
             } else {
                 self.pwd_len = "8".parse().unwrap();
             }
