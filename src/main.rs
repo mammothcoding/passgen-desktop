@@ -2,6 +2,7 @@
 
 //use std::env;
 use eframe::egui;
+use wasm_bindgen::prelude::*;
 
 use crate::generator::generator::Generator;
 use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
@@ -12,8 +13,10 @@ mod ico;
 mod text_processor;
 mod ui;
 
+/*#[cfg(not(target_arch = "wasm32"))]
 fn main() -> eframe::Result<()> {
-    //env::set_var("RUST_BACKTRACE", "full");
+    use std::env;
+    env::set_var("RUST_BACKTRACE", "full");
 
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
@@ -36,4 +39,22 @@ fn main() -> eframe::Result<()> {
             Box::new(Generator::default())
         }),
     )
+}
+
+#[cfg(target_arch = "wasm32")]*/
+fn main() {
+    console_error_panic_hook::set_once();
+    wasm_bindgen_futures::spawn_local(async {
+        eframe::start_web(
+            "McPassgen",
+            eframe::WebOptions::default(),
+            Box::new(|cc| {
+                egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support:
+                //Box::<Generator>::default()
+                Box::new(Generator::default())
+            }),
+        )
+            .await
+            .expect("failed to start McPassgen");
+    });
 }

@@ -1,5 +1,5 @@
 pub mod generator {
-    use std::collections::HashMap;
+    //use std::collections::HashMap;
     //use arboard::Clipboard;
     //use std::process::{Command, Stdio};
     use crate::text_processor::text_processor::{EN, RU};
