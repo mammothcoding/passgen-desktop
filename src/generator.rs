@@ -4,14 +4,14 @@ pub mod generator {
     use std::process::{Command, Stdio};
     use crate::text_processor::text_processor::{EN, RU};
 
-    const CIRCUITED_FIELDS: [&str; 6] = [
+    /*const CIRCUITED_FIELDS: [&str; 6] = [
         "pwd_len",
         "letters",
         "u_letters",
         "numbs",
         "spec_symbs",
         "let_num_drc_free",
-    ];
+    ];*/
 
     #[derive(Default)]
     pub struct Generator {
@@ -49,7 +49,7 @@ pub mod generator {
             }
         }
 
-        pub fn get(&self, field_string: &str) -> bool {
+        /*pub fn get(&self, field_string: &str) -> bool {
             match field_string {
                 "letters" => self.letters.clone(),
                 "u_letters" => self.u_letters.clone(),
@@ -58,9 +58,9 @@ pub mod generator {
                 "let_num_drc_free" => self.let_num_drc_free.clone(),
                 _ => true,
             }
-        }
+        }*/
 
-        pub fn set(&mut self, field_string: &str, new_val: bool) {
+        /*pub fn set(&mut self, field_string: &str, new_val: bool) {
             match field_string {
                 "letters" => self.letters = new_val,
                 "u_letters" => self.u_letters = new_val,
@@ -69,7 +69,7 @@ pub mod generator {
                 "let_num_drc_free" => self.let_num_drc_free = new_val,
                 _ => {}
             }
-        }
+        }*/
 
         pub fn switch_lang(&mut self) {
             if self.lang == "en" {

@@ -1,8 +1,9 @@
 //#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
 use std::env;
-use std::collections::HashMap;
 use eframe::egui;
+use eframe::HardwareAcceleration::Off;
+//use std::panic;
 
 use crate::generator::generator::Generator;
 use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
@@ -16,7 +17,12 @@ mod ui;
 fn main() -> eframe::Result<()> {
     env::set_var("RUST_BACKTRACE", "full");
 
+    /*panic::set_hook(Box::new(|_| {
+        println!("Custom panic hook");
+    }));*/
+
     let options = eframe::NativeOptions {
+        hardware_acceleration: Off,
         viewport: egui::ViewportBuilder::default()
             .with_inner_size([420.0, 300.0])
             //.with_min_inner_size([200.0, 200.0])
@@ -33,8 +39,7 @@ fn main() -> eframe::Result<()> {
         //Box::new(|_| Box::new(Generator::default())),
         Box::new(|cc| {
             egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support:
-                                                              //Box::<Generator>::default()
-            Box::new(Generator::default())
+            Ok(Box::new(Generator::default()))
         }),
     )
 }
