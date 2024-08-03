@@ -3,7 +3,7 @@ pub mod ui {
     use eframe::egui::text::LayoutJob;
     use eframe::egui::Align::Center;
     use eframe::egui::{
-        Direction, FontSelection, Key, Style, TextureOptions, Widget,
+        Direction, FontSelection, Key, Style
     };
     use eframe::{egui};
     use egui_extras::{Column, TableBuilder};

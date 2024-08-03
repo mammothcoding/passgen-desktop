@@ -1,11 +1,11 @@
 //#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
 //use std::env;
-use eframe::egui;
-use wasm_bindgen::prelude::*;
+//use eframe::egui;
+//use wasm_bindgen::prelude::*;
 
 use crate::generator::generator::Generator;
-use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
+//use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
 
 mod gen_engine;
 mod generator;
@@ -44,14 +44,19 @@ fn main() -> eframe::Result<()> {
 #[cfg(target_arch = "wasm32")]*/
 fn main() {
     console_error_panic_hook::set_once();
+    tracing_wasm::set_as_global_default();
+
+    let web_options = eframe::WebOptions::default();
+
     wasm_bindgen_futures::spawn_local(async {
-        eframe::start_web(
+        let runner = eframe::WebRunner::new();
+
+        runner.start(
             "McPassgen",
-            eframe::WebOptions::default(),
+            web_options,
             Box::new(|cc| {
                 egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support:
-                //Box::<Generator>::default()
-                Box::new(Generator::default())
+                Ok (Box::new(Generator::default()))
             }),
         )
             .await

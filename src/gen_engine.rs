@@ -1,6 +1,6 @@
 pub mod gen_engine {
     use crate::generator::generator::Generator;
-    use rand::Rng;
+    use rand::{Rng,SeedableRng};
 
     const LETTERS_CHARSET: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
     const U_LETTERS_CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -11,11 +11,8 @@ pub mod gen_engine {
 
     impl Generator {
         pub fn generate_pass(&self) -> String {
-            let mut rng = rand::thread_rng();
+            //let mut rng = rand::thread_rng();
             let mut pass_assembly: Vec<&[u8]> = Vec::new();
-            //let mut pass_charset: Vec<u8> = Vec::new();
-
-            //let mut pass_charset: & [u8] = LET_NUM_DRC_FREE;
 
             if self.let_num_drc_free {
                 pass_assembly.push(LET_NUM_DRC_FREE);
@@ -35,9 +32,15 @@ pub mod gen_engine {
             }
 
             let pass_charset: Vec<u8> = pass_assembly.into_iter().flatten().cloned().collect();
-            (0..self.pwd_len)
+            /*(0..self.pwd_len)
                 .map(|_| pass_charset[rng.gen_range(0..pass_charset.len())] as char)
-                .collect()
+                .collect()*/
+            let range: Vec<f64> = (0..pass_charset.len()).map(|num| num as f64).collect();
+            /*(0..self.pwd_len)
+                .map(|_| pass_charset[SeedableRng::from_seed(&range)])
+                .collect()*/
+            let mut rng: f64 = SeedableRng::from_seed(range);
+            String::from(rng.gen::<f64>())
         }
 
         pub fn is_valid_pwd_by_consist(&self, pass: String) -> bool {
