@@ -1,6 +1,7 @@
 pub mod gen_engine {
     use crate::generator::generator::Generator;
-    use rand::{Rng,SeedableRng};
+    //use rand::{Rng, SeedableRng};
+    //use rand_isaac;
 
     const LETTERS_CHARSET: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
     const U_LETTERS_CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -35,12 +36,14 @@ pub mod gen_engine {
             /*(0..self.pwd_len)
                 .map(|_| pass_charset[rng.gen_range(0..pass_charset.len())] as char)
                 .collect()*/
-            let range: Vec<f64> = (0..pass_charset.len()).map(|num| num as f64).collect();
+            //let range: Vec<f64> = (0..pass_charset.len()).map(|num| num as f64).collect();
             /*(0..self.pwd_len)
                 .map(|_| pass_charset[SeedableRng::from_seed(&range)])
                 .collect()*/
-            let mut rng: f64 = SeedableRng::from_seed(range);
-            String::from(rng.gen::<f64>())
+
+            //let a= get_random_buf().unwrap();
+            String::from("bla")
+            //pass_charset[a[0]]
         }
 
         pub fn is_valid_pwd_by_consist(&self, pass: String) -> bool {
@@ -79,5 +82,11 @@ pub mod gen_engine {
             }
             true
         }
+    }
+
+    pub fn get_random_buf() -> Result<[u8; 32], getrandom::Error> {
+        let mut buf = [0u8; 32];
+        getrandom::getrandom(&mut buf)?;
+        Ok(buf)
     }
 }

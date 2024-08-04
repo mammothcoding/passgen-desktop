@@ -8,21 +8,24 @@ authors = ["Mamontov Konstantin <k@mamont.xyz>"]
 build = "build.rs"
 
 [dependencies]
-rand = { version = "*", features = ["small_rng"], default-features = false }
-egui_extras = { version = "*", features = ["all_loaders"] }
-image = { version = "*", features = ["jpeg", "png"] }
-egui = "*"
-egui_web ="*"
-eframe = { version = "*", default-features = false, features = [
+#rand = { version = "*", features = ["small_rng"], default-features = false }
+#rand_isaac = "0.3.0"
+getrandom = { version = "0.2.15", features = ["js"] }
+
+egui_extras = { version = "0.28.1", features = ["all_loaders"] }
+image = { version = "0.25.2", features = ["jpeg", "png"] }
+egui = "0.28.1"
+egui_web ="0.17.0"
+eframe = { version = "0.28.1", default-features = false, features = [
     "accesskit",     # Make egui compatible with screen readers. NOTE: adds a lot of dependencies.
     "default_fonts", # Embed the default egui fonts.
     "glow",          # Use the glow rendering backend. Alternative: "wgpu".
     "persistence",   # Enable restoring app state when restarting the app.
 ] }
-log = "*"
-console_error_panic_hook = "*"
-tracing-wasm = "*"
-wasm-bindgen-futures = "*"
+log = "0.4.22"
+console_error_panic_hook = "0.1.7"
+tracing-wasm = "0.2.1"
+wasm-bindgen-futures = "0.4.42"
 wasm-bindgen = "0.2.92"
 
 
