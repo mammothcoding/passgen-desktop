@@ -82,9 +82,9 @@ pub mod generator {
         pub fn submit_to_pwd(&mut self) {
             if self.is_valid_user_input() {
                 let mut pwd = self.generate_pass();
-                while !self.is_valid_pwd_by_consist(pwd.clone()) {
+                /*while !self.is_valid_pwd_by_consist(pwd.clone()) {
                     pwd = self.generate_pass();
-                }
+                }*/
                 self.pwd = pwd;
 
                 /*if cfg!(unix) {

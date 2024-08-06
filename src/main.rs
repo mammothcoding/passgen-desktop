@@ -2,10 +2,8 @@
 
 //use std::env;
 //use eframe::egui;
-//use wasm_bindgen::prelude::*;
-
+use wasm_bindgen_futures::wasm_bindgen::prelude::wasm_bindgen;
 use crate::generator::generator::Generator;
-//use crate::ico::ico::{gen_icon_from_png_pixels_data, ICO_PNG_PXL_DATA};
 
 mod gen_engine;
 mod generator;
@@ -60,6 +58,44 @@ fn main() {
             }),
         )
             .await
-            .expect("failed to start McPassgen");
+            .unwrap()
     });
 }
+
+
+/*
+#[derive(Clone)]
+#[wasm_bindgen]
+pub struct WebHandle {
+    runner: eframe::WebRunner,
+}
+
+#[wasm_bindgen]
+impl WebHandle {
+    /// Installs a panic hook, then returns.
+    #[allow(clippy::new_without_default)]
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Self {
+        // Redirect [`log`] message to `console.log` and friends:
+        eframe::WebLogger::init(log::LevelFilter::Debug).ok();
+
+        Self {
+            runner: eframe::WebRunner::new(),
+        }
+    }
+
+    /// Call this once from JavaScript to start your app.
+    #[wasm_bindgen]
+    pub async fn start(&self) -> Result<(), wasm_bindgen::JsValue> {
+        self.runner
+            .start(
+                "McPassgen",
+                eframe::WebOptions::default(),
+                Box::new(|cc| {
+                    egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support:
+                    Ok (Box::new(Generator::default()))
+                }),
+            )
+            .await
+    }
+}*/

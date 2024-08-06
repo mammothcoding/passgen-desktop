@@ -15,9 +15,7 @@ getrandom = { version = "0.2.15", features = ["js"] }
 egui_extras = { version = "0.28.1", features = ["all_loaders"] }
 image = { version = "0.25.2", features = ["jpeg", "png"] }
 egui = "0.28.1"
-egui_web ="0.17.0"
 eframe = { version = "0.28.1", default-features = false, features = [
-    "accesskit",     # Make egui compatible with screen readers. NOTE: adds a lot of dependencies.
     "default_fonts", # Embed the default egui fonts.
     "glow",          # Use the glow rendering backend. Alternative: "wgpu".
     "persistence",   # Enable restoring app state when restarting the app.
@@ -27,6 +25,8 @@ console_error_panic_hook = "0.1.7"
 tracing-wasm = "0.2.1"
 wasm-bindgen-futures = "0.4.42"
 wasm-bindgen = "0.2.92"
+web-sys = { version = "0.3.69", features = ["Window", "Document", "HtmlElement", "Text"] }
+js-sys = "0.3.69"
 
 
 # Reduce the size of the executable  file:

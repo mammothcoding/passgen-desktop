@@ -201,12 +201,12 @@ pub mod ui {
                 }
 
                 // Keyboard events
-                if ctx.input(|i| i.key_pressed(Key::Enter)) {
+                /*if ctx.input(|i| i.key_pressed(Key::Enter)) {
                     self.submit_to_pwd();
                 }
                 if ctx.input(|i| i.key_pressed(Key::Escape)) {
                     ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
-                }
+                }*/
             });
         }
     }

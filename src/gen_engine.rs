@@ -83,10 +83,4 @@ pub mod gen_engine {
             true
         }
     }
-
-    pub fn get_random_buf() -> Result<[u8; 32], getrandom::Error> {
-        let mut buf = [0u8; 32];
-        getrandom::getrandom(&mut buf)?;
-        Ok(buf)
-    }
 }
