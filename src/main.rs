@@ -58,7 +58,7 @@ fn main() {
             }),
         )
             .await
-            .unwrap()
+            .expect("failed to start McPassgen");
     });
 }
 

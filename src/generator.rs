@@ -49,6 +49,11 @@ pub mod generator {
             }
         }
 
+        /// Called once before the first frame.
+        pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
+            Generator::default()
+        }
+
         pub fn get(&self, field_string: &str) -> bool {
             match field_string {
                 "letters" => self.letters.clone(),
