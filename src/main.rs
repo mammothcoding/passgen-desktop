@@ -17,19 +17,15 @@ mod ui;
 fn main() -> eframe::Result<()> {
     env::set_var("RUST_BACKTRACE", "full");
 
-    /*panic::set_hook(Box::new(|_| {
-        println!("Custom panic hook");
-    }));*/
-
     let options = eframe::NativeOptions {
         hardware_acceleration: Off,
         viewport: egui::ViewportBuilder::default()
             .with_inner_size([420.0, 300.0])
-            //.with_min_inner_size([200.0, 200.0])
+            .with_min_inner_size([420.0, 300.0])
             //.with_max_inner_size([200.0, 200.0])
             .with_resizable(true)
             .with_transparent(true)
-            .with_icon(gen_icon_from_png_pixels_data(24, ICO_PNG_PXL_DATA)), //for X11 and mac, not for wayland programmaticaly way
+            .with_icon(gen_icon_from_png_pixels_data(24, ICO_PNG_PXL_DATA)), //for X11 and mac, not for wayland programmatically way
         ..Default::default()
     };
 

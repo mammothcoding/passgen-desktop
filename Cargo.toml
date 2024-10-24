@@ -11,19 +11,12 @@ build = "build.rs"
 
 [dependencies]
 rand = "*"
-eframe = { version = "*", default-features = false, features = ["default_fonts", "wayland", "persistence"] }#, features = ["default_fonts", "wayland", "persistence"] }
+egui = "*"
+#eframe = { version = "*", default-features = false, features = ["default_fonts", "wayland", "persistence", "wgpu"] }#for wayland build
+eframe = { version = "*", default-features = false, features = ["default_fonts", "x11", "persistence", "wgpu"] }#for x11 build
 egui_extras = { version = "*", features = ["all_loaders"] }
 arboard = "*"
 image = { version = "*", features = ["jpeg", "png"] }
-
-#[patch.crates-io]
-#egui_glow = { path = "distrib/egui_glow-0.28.1" }
-
-# web:
-#[target.'cfg(target_arch = "wasm32")'.dependencies]
-#console_error_panic_hook = "0.1.7"
-#tracing-wasm = "0.2"
-#wasm-bindgen-futures = "0.4"
 
 #[target.'cfg(target_arch = "windows")'.dependencies]
 #eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }
@@ -38,7 +31,3 @@ strip = true
 
 [build-dependencies]
 #windows_exe_info = "*"
-
-#[dependencies.winit]
-#version = "*"
-#features = ["default"]
