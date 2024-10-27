@@ -1,7 +1,7 @@
 pub mod text_processor {
     use crate::generator::generator::Generator;
 
-    pub(crate) const EN: [(&str, &str); 13] = [
+    pub(crate) const EN: [(&str, &str); 14] = [
         ("pass_len", "Password length:"),
         ("inc_lcase", "include lowercase letters"),
         ("inc_cap", "include capital letters"),
@@ -15,9 +15,10 @@ pub mod text_processor {
         ("to_clip", "this password was copied to clipboard"),
         ("homepage", "Homepage: https://github.com/mammothcoding"),
         ("lang_ttip", "Interface language switcher"),
+        ("but_about", "About program"),
     ];
 
-    pub(crate) const RU: [(&str, &str); 13] = [
+    pub(crate) const RU: [(&str, &str); 14] = [
         ("pass_len", "Длина пароля:"),
         ("inc_lcase", "включая маленькие буквы"),
         ("inc_cap", "включая заглавные буквы"),
@@ -31,6 +32,7 @@ pub mod text_processor {
         ("to_clip", "пароль был скопирован в буфер обмена"),
         ("homepage", "Домашняя страница: https://github.com/mammothcoding"),
         ("lang_ttip", "Переключатель языка интерфейса"),
+        ("but_about", "О программе"),
     ];
 
     impl Generator {

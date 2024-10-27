@@ -6,22 +6,69 @@ pub mod ui {
         Direction, FontSelection, Key, Style
     };
     use eframe::{egui};
+    use egui::Visuals;
     use egui_extras::{Column, TableBuilder};
 
     impl eframe::App for Generator {
         fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
             // Title
             egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
-                ui.with_layout(
-                    egui::Layout::centered_and_justified(Direction::LeftToRight),
-                    |ui| {
-                        ui.label(
-                            egui::RichText::new("Mammothcoding passgen")
-                                .heading()
-                                .color(egui::Color32::LIGHT_BLUE),
-                        );
-                    },
-                );
+                TableBuilder::new(ui)
+                    .column(Column::initial(10.0))
+                    .column(Column::remainder())
+                    .column(Column::initial(10.0))
+                    .body(|mut body| {
+                        body.row(24.0, |mut row| {
+                            // Dark-light switcher
+                            row.col(|ui| {
+                                ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                                    egui::widgets::global_theme_preference_switch(ui);
+                                    /*if ui.button("☀").clicked() {
+                                        let visuals = if ui.visuals().dark_mode {
+                                            Visuals::light()
+                                        } else {
+                                            Visuals::dark()
+                                        };
+                                        ctx.set_visuals(visuals);
+                                    }*/
+                                });
+                            });
+
+                            // Central top text
+                            row.col(|ui| {
+                                ui.with_layout(
+                                    egui::Layout::centered_and_justified(Direction::LeftToRight),
+                                    |ui| {
+                                        ui.label(
+                                            egui::RichText::new("Mammothcoding passgen")
+                                                .heading()
+                                                .color(egui::Color32::LIGHT_BLUE),
+                                        );
+                                    },
+                                );
+                            });
+
+                            // About button
+                            row.col(|ui| {
+                                ui.with_layout(
+                                    egui::Layout::right_to_left(egui::Align::Center),
+                                    |ui| {
+                                        let ind_btn = ui
+                                            .add_sized(
+                                                [20.0, 20.0],
+                                                egui::Button::new(egui::RichText::new("i").color(egui::Color32::GREEN))
+                                                    .small()
+                                                    .rounding(egui::Rounding::same(45.0)),
+                                            )
+                                            .on_hover_text(self.get_lang_text("but_about"));
+                                        if ind_btn.clicked() {
+                                            self.switch_lang();
+                                        };
+                                    },
+                                );
+                            });
+                        });
+                    });
             });
 
             // Footer
@@ -185,7 +232,7 @@ pub mod ui {
                             ui.add(egui::Label::new(
                                 egui::RichText::new(pwd)
                                     .font(egui::FontId::monospace(32.0))
-                                    .color(egui::Color32::LIGHT_YELLOW)
+                                    .color(egui::Color32::GREEN)
                                     .strong(),
                             ));
                         },
