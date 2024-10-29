@@ -6,7 +6,7 @@ pub mod ui {
         Direction, FontSelection, Key, Style
     };
     use eframe::{egui};
-    use egui::Visuals;
+    use egui::OpenUrl;
     use egui_extras::{Column, TableBuilder};
 
     impl eframe::App for Generator {
@@ -74,16 +74,31 @@ pub mod ui {
             // Footer
             egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
                 TableBuilder::new(ui)
-                    .column(Column::initial(24.0))
+                    .column(Column::initial(25.0))
                     .column(Column::remainder())
-                    .column(Column::initial(10.0))
+                    .column(Column::initial(25.0))
                     .body(|mut body| {
                         body.row(24.0, |mut row| {
-                            // Label image
+
+                            // Labeled button send to home
                             row.col(|ui| {
-                                // this is hardcoding image to binary file
-                                ui.image(egui::include_image!("../icon_24x24.png"))
-                                    .on_hover_text("Mammothcoding passgen");
+                                let img = egui::Image::new(egui::include_image!("../icon_24x24.png"));
+                                if ui
+                                    .add_sized(
+                                        [25.0, 25.0],
+                                        egui::ImageButton::new(img)
+                                            .rounding(0.0)//бесполез
+                                            //.uv()
+                                    )
+                                    .on_hover_text("Mammothcoding passgen home".to_string())
+                                    .clicked()
+                                {
+                                    let url = OpenUrl {
+                                        url: "https://github.com/mammothcoding".to_string(),
+                                        new_tab: true,
+                                    };
+                                    ui.ctx().open_url(url);
+                                };
                             });
 
                             // Central bottom text
@@ -114,7 +129,7 @@ pub mod ui {
                                     |ui| {
                                         let ind_btn = ui
                                             .add_sized(
-                                                [20.0, 20.0],
+                                                [25.0, 25.0],
                                                 egui::Button::new(ind_text)
                                                     .small()
                                                     .rounding(egui::Rounding::same(60.0))
