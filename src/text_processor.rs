@@ -1,7 +1,7 @@
 pub mod text_processor {
     use crate::generator::generator::Generator;
 
-    pub(crate) const EN: [(&str, &str); 14] = [
+    pub(crate) const EN: [(&str, &str); 16] = [
         ("pass_len", "Password length:"),
         ("inc_lcase", "include lowercase letters"),
         ("inc_cap", "include capital letters"),
@@ -16,9 +16,11 @@ pub mod text_processor {
         ("homepage", "Homepage: https://github.com/mammothcoding"),
         ("lang_ttip", "Interface language switcher"),
         ("but_about", "About program"),
+        ("cls", "Clear password"),
+        ("abo_win_name", "About programm"),
     ];
 
-    pub(crate) const RU: [(&str, &str); 14] = [
+    pub(crate) const RU: [(&str, &str); 16] = [
         ("pass_len", "Длина пароля:"),
         ("inc_lcase", "включая маленькие буквы"),
         ("inc_cap", "включая заглавные буквы"),
@@ -30,14 +32,18 @@ pub mod text_processor {
         ("but_ttip", "Сгенерировать пароль"),
         ("made_rust", "Создано на языке RUST"),
         ("to_clip", "пароль был скопирован в буфер обмена"),
-        ("homepage", "Домашняя страница: https://github.com/mammothcoding"),
+        (
+            "homepage",
+            "Домашняя страница: https://github.com/mammothcoding",
+        ),
         ("lang_ttip", "Переключатель языка интерфейса"),
         ("but_about", "О программе"),
+        ("cls", "Очистить пароль"),
+        ("abo_win_name", "О программе"),
     ];
 
     impl Generator {
-        pub fn get_lang_text(&self, text_id: &str) -> String
-        {
+        pub fn get_lang_text(&self, text_id: &str) -> String {
             let lang_name: String = self.lang.clone().to_owned();
             let lang_name_slice: &str = &lang_name[..];
 

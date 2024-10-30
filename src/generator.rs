@@ -1,8 +1,8 @@
 pub mod generator {
-    use std::collections::HashMap;
-    use arboard::Clipboard;
-    use std::process::{Command, Stdio};
     use crate::text_processor::text_processor::{EN, RU};
+    use arboard::Clipboard;
+    use std::collections::HashMap;
+    use std::process::{Command, Stdio};
 
     /*const CIRCUITED_FIELDS: [&str; 6] = [
         "pwd_len",
@@ -28,6 +28,7 @@ pub mod generator {
         pub en_texts: HashMap<&'static str, &'static str>,
         pub ru_texts: HashMap<&'static str, &'static str>,
         pub errors: (String, String),
+        pub about_visible: bool,
     }
 
     impl Generator {
@@ -46,6 +47,7 @@ pub mod generator {
                 en_texts: HashMap::from(EN),
                 ru_texts: HashMap::from(RU),
                 errors: ("".to_string(), "".to_string()),
+                about_visible: false,
             }
         }
 

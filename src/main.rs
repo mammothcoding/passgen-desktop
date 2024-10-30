@@ -1,8 +1,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
-use std::env;
 use eframe::egui;
 use eframe::HardwareAcceleration::Off;
+use std::env;
 //use std::panic;
 
 use crate::generator::generator::Generator;
@@ -32,9 +32,8 @@ fn main() -> eframe::Result<()> {
     eframe::run_native(
         "McPassgen",
         options,
-        //Box::new(|_| Box::new(Generator::default())),
         Box::new(|cc| {
-            egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support:
+            egui_extras::install_image_loaders(&cc.egui_ctx); // This gives us image support
             Ok(Box::new(Generator::default()))
         }),
     )
