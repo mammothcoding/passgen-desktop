@@ -73,38 +73,12 @@ pub mod ui {
                             });
                         });
                     });
-
-                // About window
-                /*#[derive(Default)]
-            pub struct About{
-                window: egui::Window,
-            }
-
-            impl About {
-                pub fn show(&mut self, ui: &mut Ui, open: &mut bool) {
-                    self.window = egui::Window::new("About").open(open).show(ui.ctx(), |ui|
-                        self.ui(ui));
-                }
-
-                pub fn ui(&mut self, ui: &mut Ui) {
-                    ui.label("Лучший генератор!");
-                }
-            }*/
-                let window = egui::Window::new(self.get_lang_text("abo_win_name"))
-                    .default_pos(egui::Pos2::new(25.0, 25.0));
+                // Check and show About window
                 if self.about_visible {
-                    //window.open(&mut true).show(ui.ctx(), |ui| {
-                    window.show(ui.ctx(), |ui| {
-                        ui.label("Лучший генератор!");
-
-                        if ui.add(egui::Button::new("ok")
-                            .small()
-                            .rounding(egui::Rounding::same(5.0)))
-                            .clicked()
-                        {
-                            self.about_visible = false;
-                        }
-                    });
+                    /*let about_texts = HashMap::from([
+                        ("pass_len", "Password length:"),
+                    ]);*/
+                    show_about_window(self, ui.ctx());
                 }
             });
 
@@ -123,7 +97,7 @@ pub mod ui {
                                     .add_sized(
                                         [24.0, 24.0],
                                         egui::ImageButton::new(img)
-                                            .rounding(egui::Rounding::same(10.0)),
+                                            .rounding(egui::Rounding::same(5.0)),
                                     )
                                     .on_hover_text(self.get_lang_text("cls"))
                                     .clicked()
@@ -134,17 +108,6 @@ pub mod ui {
 
                             // Central bottom text
                             row.col(|ui| {
-                                /*ui.with_layout(
-                                    egui::Layout::centered_and_justified(Direction::LeftToRight),
-                                    |ui| {
-                                        let hyp = egui::Hyperlink::from_label_and_url(
-                                            self.get_lang_text("homepage"),
-                                            "https://github.com/mammothcoding",
-                                        )
-                                        .open_in_new_tab(true);
-                                        ui.add(hyp);
-                                    },
-                                );*/
                                 if self.pwd != "" {
                                     ui.with_layout(
                                         egui::Layout::centered_and_justified(
@@ -213,13 +176,15 @@ pub mod ui {
                                 let t_u_letters = self.get_lang_text("inc_cap");
                                 let t_numbs = self.get_lang_text("inc_num");
                                 let t_spec_symbs = self.get_lang_text("inc_ss");
-                                let t_let_num_drc_free = self.get_lang_text("inc_all_ex");
+                                let t_conven_criter = self.get_lang_text("inc_conven");
 
                                 ui.checkbox(&mut self.letters, t_letters);
                                 ui.checkbox(&mut self.u_letters, t_u_letters);
                                 ui.checkbox(&mut self.numbs, t_numbs);
                                 ui.checkbox(&mut self.spec_symbs, t_spec_symbs);
-                                ui.checkbox(&mut self.let_num_drc_free, t_let_num_drc_free);
+                                ui.
+                                    checkbox(&mut self.convenience_criterion, t_conven_criter)
+                                    .on_hover_text(self.get_lang_text("inc_conven_ttip"));
                             });
 
                             // Gen button
@@ -313,5 +278,78 @@ pub mod ui {
                 }
             });
         }
+    }
+
+    pub fn show_about_window(gen: &mut Generator, ctx: &egui::Context) {
+        let abo_win_name = gen.get_lang_text("abo_win_name");
+        let abo_desc = gen.get_lang_text("abo_desc");
+        let abo_homepage = gen.get_lang_text("abo_homepage");
+
+        egui::Window::new(abo_win_name)
+            .constrain(true)
+            .collapsible(false)
+            .anchor(egui::Align2::CENTER_CENTER, egui::Vec2::ZERO)
+            .open(&mut gen.about_visible)
+            .show(ctx, |ui| {
+                ui.with_layout(
+                    egui::Layout::centered_and_justified(Direction::LeftToRight),
+                    |ui| {
+                        let hyp_home = egui::Hyperlink::from_label_and_url(
+                            "https://passgen.mamont.xyz",
+                            "https://passgen.mamont.xyz",
+                        ).open_in_new_tab(true);
+                        let hyp_git = egui::Hyperlink::from_label_and_url(
+                            "https://github.com/mammothcoding",
+                            "https://github.com/mammothcoding",
+                        ).open_in_new_tab(true);
+
+
+
+
+
+                        ui.with_layout(
+                            egui::Layout::centered_and_justified(
+                                Direction::LeftToRight,
+                            ),
+                            |ui| {
+                                ui.add(egui::Label::new(
+                                    egui::RichText::new(abo_desc)
+                                        .font(egui::FontId::monospace(10.0))
+                                        .color(egui::Color32::WHITE),
+                                ));
+                            },
+                        );
+
+                        ui.with_layout(
+                            egui::Layout::centered_and_justified(
+                                Direction::LeftToRight,
+                            ),
+                            |ui| {
+                                ui.add(egui::Label::new(
+                                    egui::RichText::new(abo_homepage)
+                                        .font(egui::FontId::monospace(10.0))
+                                        .color(egui::Color32::WHITE),
+                                ));
+                                ui.add(hyp_home);
+                            },
+                        );
+
+                        ui.with_layout(
+                            egui::Layout::centered_and_justified(
+                                Direction::LeftToRight,
+                            ),
+                            |ui| {
+                                ui.add(egui::Label::new(
+                                    egui::RichText::new("Github:")
+                                        .font(egui::FontId::monospace(10.0))
+                                        .color(egui::Color32::WHITE),
+                                ));
+                                ui.add(hyp_git);
+                            },
+                        );
+
+                    },
+                );
+            });
     }
 }

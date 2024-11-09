@@ -17,7 +17,7 @@ pub mod gen_engine {
 
             //let mut pass_charset: & [u8] = LET_NUM_DRC_FREE;
 
-            if self.let_num_drc_free {
+            if self.convenience_criterion {
                 pass_assembly.push(LET_NUM_DRC_FREE);
             } else {
                 if self.letters {
@@ -54,17 +54,17 @@ pub mod gen_engine {
                 res
             };
 
-            if self.letters || self.let_num_drc_free {
+            if self.letters || self.convenience_criterion {
                 if !check_to_available_for(LETTERS_CHARSET) {
                     return false;
                 }
             }
-            if self.u_letters || self.let_num_drc_free {
+            if self.u_letters || self.convenience_criterion {
                 if !check_to_available_for(U_LETTERS_CHARSET) {
                     return false;
                 }
             }
-            if self.numbs || self.let_num_drc_free {
+            if self.numbs || self.convenience_criterion {
                 if !check_to_available_for(NUMBERS_CHARSET) {
                     return false;
                 }

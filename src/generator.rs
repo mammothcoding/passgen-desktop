@@ -4,22 +4,13 @@ pub mod generator {
     use std::collections::HashMap;
     use std::process::{Command, Stdio};
 
-    /*const CIRCUITED_FIELDS: [&str; 6] = [
-        "pwd_len",
-        "letters",
-        "u_letters",
-        "numbs",
-        "spec_symbs",
-        "let_num_drc_free",
-    ];*/
-
     #[derive(Default)]
     pub struct Generator {
         pub letters: bool,
         pub u_letters: bool,
         pub numbs: bool,
         pub spec_symbs: bool,
-        pub let_num_drc_free: bool,
+        pub convenience_criterion: bool,
         pub pwd_len: u32,
         pub min_pwd_len: u32,
         pub max_pwd_len: u32,
@@ -38,7 +29,7 @@ pub mod generator {
                 u_letters: false,
                 numbs: false,
                 spec_symbs: true,
-                let_num_drc_free: true,
+                convenience_criterion: true,
                 pwd_len: 8,
                 min_pwd_len: 4,
                 max_pwd_len: 10000,
