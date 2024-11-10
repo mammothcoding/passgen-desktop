@@ -1,7 +1,7 @@
 pub mod text_processor {
     use crate::generator::generator::Generator;
 
-    pub(crate) const EN: [(&str, &str); 20] = [
+    pub(crate) const EN: [(&str, &str); 19] = [
         ("pass_len", "Password length:"),
         ("inc_lcase", "include lowercase letters"),
         ("inc_cap", "include capital letters"),
@@ -19,12 +19,11 @@ pub mod text_processor {
         ("cls", "Clear password"),
         ("abo_win_name", "About programm"),
         ("abo_desc", "A simple password generator"),
-        ("abo_version", "Version"),
         ("abo_license", "License"),
         ("abo_homepage", "Homepage"),
     ];
 
-    pub(crate) const RU: [(&str, &str); 20] = [
+    pub(crate) const RU: [(&str, &str); 19] = [
         ("pass_len", "Длина пароля:"),
         ("inc_lcase", "включая маленькие буквы"),
         ("inc_cap", "включая заглавные буквы"),
@@ -42,7 +41,6 @@ pub mod text_processor {
         ("cls", "Очистить пароль"),
         ("abo_win_name", "О программе"),
         ("abo_desc", "Простой генератор паролей"),
-        ("abo_version", "Версия"),
         ("abo_license", "Лицензия"),
         ("abo_homepage", "Домашняя страница"),
     ];

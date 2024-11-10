@@ -1,26 +1,21 @@
 [package]
 name = "passgen-desktop"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 license = "MIT"
 description = "A simple password generator."
 authors = ["Mamontov Konstantin <k@mamont.xyz>"]
 build = "build.rs"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 rand = "*"
 egui = "*"
 #eframe = { version = "*", default-features = false, features = ["default_fonts", "wayland", "persistence", "wgpu"] }#for wayland build
-eframe = { version = "*", default-features = false, features = ["default_fonts", "x11", "persistence", "wgpu"] }#for x11 build
-#eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }#for Windows build
+#eframe = { version = "*", default-features = false, features = ["default_fonts", "x11", "persistence", "wgpu"] }#for x11 build
+eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }#for Windows build
 egui_extras = { version = "*", features = ["all_loaders"] }
 arboard = "*"
 image = { version = "*", features = ["jpeg", "png"] }
-
-#[target.'cfg(target_arch = "windows")'.dependencies]
-#eframe = { version = "*", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }
 
 # Reduce the size of the executable  file:
 [profile.release]

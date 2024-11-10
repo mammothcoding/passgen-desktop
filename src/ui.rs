@@ -50,34 +50,28 @@ pub mod ui {
 
                             // About button
                             row.col(|ui| {
-                                ui.with_layout(
-                                    egui::Layout::right_to_left(egui::Align::Center),
-                                    |ui| {
-                                        let ind_btn = ui
-                                            .add_sized(
-                                                [24.0, 24.0],
-                                                egui::Button::new(
-                                                    egui::RichText::new("i")
-                                                        .color(egui::Color32::GREEN),
-                                                )
-                                                .small()
-                                                .rounding(egui::Rounding::same(45.0)),
+                                ui.with_layout(egui::Layout::right_to_left(Center), |ui| {
+                                    let ind_btn = ui
+                                        .add_sized(
+                                            [24.0, 24.0],
+                                            egui::Button::new(
+                                                egui::RichText::new("i")
+                                                    .color(egui::Color32::GREEN),
                                             )
-                                            .on_hover_text(self.get_lang_text("but_about"));
-                                        if ind_btn.clicked() {
-                                            self.about_visible =
-                                                if self.about_visible { false } else { true };
-                                        };
-                                    },
-                                );
+                                            .small()
+                                            .rounding(egui::Rounding::same(45.0)),
+                                        )
+                                        .on_hover_text(self.get_lang_text("but_about"));
+                                    if ind_btn.clicked() {
+                                        self.about_visible =
+                                            if self.about_visible { false } else { true };
+                                    };
+                                });
                             });
                         });
                     });
                 // Check and show About window
                 if self.about_visible {
-                    /*let about_texts = HashMap::from([
-                        ("pass_len", "Password length:"),
-                    ]);*/
                     show_about_window(self, ui.ctx());
                 }
             });
@@ -109,13 +103,27 @@ pub mod ui {
                             // Central bottom text
                             row.col(|ui| {
                                 if self.pwd != "" {
+                                    let centr_dotm_text: String = if self.lang.as_str() == "en" {
+                                        if self.errors.0 != "" {
+                                            self.errors.0.clone()
+                                        } else {
+                                            self.get_lang_text("to_clip")
+                                        }
+                                    } else {
+                                        if self.errors.1 != "" {
+                                            self.errors.1.clone()
+                                        } else {
+                                            self.get_lang_text("to_clip")
+                                        }
+                                    };
+
                                     ui.with_layout(
                                         egui::Layout::centered_and_justified(
                                             Direction::LeftToRight,
                                         ),
                                         |ui| {
                                             ui.add(egui::Label::new(
-                                                egui::RichText::new(self.get_lang_text("to_clip"))
+                                                egui::RichText::new(centr_dotm_text)
                                                     .font(egui::FontId::monospace(10.0))
                                                     .color(egui::Color32::LIGHT_GREEN),
                                             ));
@@ -192,8 +200,8 @@ pub mod ui {
                                     let style = Style::default();
                                     let mut layout_job = LayoutJob::default();
                                     /*let img =
-                                        egui::Image::new(egui::include_image!("../icon_24x24.png"))
-                                            .fit_to_original_size(1.0);*/
+                                    egui::Image::new(egui::include_image!("../icon_24x24.png"))
+                                        .fit_to_original_size(1.0);*/
 
                                     egui::widget_text::RichText::new(
                                         self.get_lang_text("but_gen_gen"),
@@ -288,21 +296,19 @@ pub mod ui {
         let abo_license = gen.get_lang_text("abo_license");
         let abo_homepage = gen.get_lang_text("abo_homepage");
 
-        let hyp_lic = egui::Hyperlink::from_label_and_url(
-            "MIT  ",
-            "https://choosealicense.com/licenses/mit",
-        )
-            .open_in_new_tab(true);
+        let hyp_lic =
+            egui::Hyperlink::from_label_and_url("MIT  ", "https://choosealicense.com/licenses/mit")
+                .open_in_new_tab(true);
         let hyp_home = egui::Hyperlink::from_label_and_url(
             "https://passgen.mamont.xyz",
             "https://passgen.mamont.xyz",
         )
-            .open_in_new_tab(true);
+        .open_in_new_tab(true);
         let hyp_git = egui::Hyperlink::from_label_and_url(
             "https://github.com/mammothcoding",
             "https://github.com/mammothcoding",
         )
-            .open_in_new_tab(true);
+        .open_in_new_tab(true);
 
         egui::Window::new(abo_win_name)
             .constrain(true)

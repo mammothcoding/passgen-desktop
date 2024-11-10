@@ -28,7 +28,7 @@ pub mod generator {
                 letters: false,
                 u_letters: false,
                 numbs: false,
-                spec_symbs: true,
+                spec_symbs: false,
                 convenience_criterion: true,
                 pwd_len: 8,
                 min_pwd_len: 4,
@@ -41,28 +41,6 @@ pub mod generator {
                 about_visible: false,
             }
         }
-
-        /*pub fn get(&self, field_string: &str) -> bool {
-            match field_string {
-                "letters" => self.letters.clone(),
-                "u_letters" => self.u_letters.clone(),
-                "numbs" => self.numbs.clone(),
-                "spec_symbs" => self.spec_symbs.clone(),
-                "let_num_drc_free" => self.let_num_drc_free.clone(),
-                _ => true,
-            }
-        }*/
-
-        /*pub fn set(&mut self, field_string: &str, new_val: bool) {
-            match field_string {
-                "letters" => self.letters = new_val,
-                "u_letters" => self.u_letters = new_val,
-                "numbs" => self.numbs = new_val,
-                "spec_symbs" => self.spec_symbs = new_val,
-                "let_num_drc_free" => self.let_num_drc_free = new_val,
-                _ => {}
-            }
-        }*/
 
         pub fn switch_lang(&mut self) {
             if self.lang == "en" {
