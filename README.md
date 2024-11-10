@@ -1,7 +1,12 @@
 # passgen-desktop
+Crossplatforming gui password generator.
 
 ![alt text](./App_screen.png "passgen-console-linuxwin")
 
-Crossplatforming gui password generator.
+
 
 [Releases/Downloads](https://github.com/mammothcoding/passgen-desktop/releases/)
+
+### License
+
+[MIT](https://choosealicense.com/licenses/mit/)
