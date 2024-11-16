@@ -1,3 +1,4 @@
+![alt text](./McDev_thin_900x70.png "McDev_thin_900x70.png")
 # passgen-desktop
 Crossplatforming gui password generator.
 
