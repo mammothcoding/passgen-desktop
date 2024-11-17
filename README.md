@@ -1,6 +1,6 @@
 ![alt text](./McDev_thin_900x70.png "McDev_thin_900x70.png")
 # passgen-desktop
-Crossplatforming gui password generator.
+Cross-platform password generator with GUI bulded using egui library.
 
 ![alt text](./App_screen.png "passgen-console-linuxwin")
 
