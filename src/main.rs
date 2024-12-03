@@ -23,6 +23,7 @@ fn main() -> eframe::Result<()> {
             .with_inner_size([420.0, 300.0])
             //.with_min_inner_size([420.0, 300.0])
             //.with_max_inner_size([200.0, 200.0])
+            .with_maximize_button(false)
             .with_resizable(false)
             .with_transparent(true)
             .with_icon(gen_icon_from_png_pixels_data(24, ICO_PNG_PXL_DATA)), //for X11 and mac, not for wayland programmatically way

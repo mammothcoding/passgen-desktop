@@ -6,14 +6,16 @@
 [![Build Status](https://github.com/mammothcoding/passgen-desktop/actions/workflows/rust.yml/badge.svg?event=push)](https://github.com/mammothcoding/passgen-desktop/actions/workflows/rust.yml)
 [![made-with-rust](https://img.shields.io/badge/Made%20with-Rust-1f425f.svg)](https://www.rust-lang.org/)
 
-# passgen-desktop
-Cross-platform password generator with GUI bulded using egui library.
+# 🔏 Passgen-desktop
+Cross-platform gui-tool (emilk/egui) for generating cryptographically secure passwords/tokens and other sets and sequences.
+
+[CSPRNGs](https://rust-random.github.io/book/guide-rngs.html#cryptographically-secure-pseudo-random-number-generators-csprngs) Isaac64Rng and Hc128Rng are used.
 
 ![alt text](./App_screen.png "passgen-console-linuxwin")
 
 
 
-[Releases/Downloads](https://github.com/mammothcoding/passgen-desktop/releases/)
+[Releases/Builded packages](https://github.com/mammothcoding/passgen-desktop/releases/)
 
 ### License
 

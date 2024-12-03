@@ -1,10 +1,10 @@
 [package]
 name = "passgen-desktop"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2021"
-rust-version = "1.82"
+rust-version = "1.83"
 license = "MIT"
-description = "A simple password generator."
+description = "Cross-platform gui-tool (emilk/egui) for generating cryptographically secure passwords/tokens and other sets and sequences."
 readme = "README.md"
 authors = ["Mamontov Konstantin <k@mamont.xyz>"]
 build = "build.rs"
@@ -16,10 +16,13 @@ exclude = [".*"]
 
 [dependencies]
 rand = "0.8.5"
+rand_seeder = "0.3.0"
+rand_isaac = "0.3.0"
+rand_hc = "0.3.2"
 egui = "0.29.1"
 #eframe = { version = "0.29.1", default-features = false, features = ["default_fonts", "wayland", "persistence", "wgpu"] }#for wayland build
-eframe = { version = "0.29.1", default-features = false, features = ["default_fonts", "x11", "persistence", "wgpu"] }#for x11 build
-#eframe = { version = "0.29.1", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }#for Windows build
+#eframe = { version = "0.29.1", default-features = false, features = ["default_fonts", "x11", "persistence", "wgpu"] }#for x11 build
+eframe = { version = "0.29.1", default-features = false, features = ["default_fonts", "wgpu", "persistence"] }#for Windows build
 egui_extras = { version = "0.29.1", features = ["all_loaders"] }
 arboard = "3.4.1"
 image = { version = "0.25.4", features = ["jpeg", "png"] }

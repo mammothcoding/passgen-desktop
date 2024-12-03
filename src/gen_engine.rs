@@ -1,6 +1,9 @@
 pub mod gen_engine {
     use crate::generator::generator::Generator;
     use rand::Rng;
+    use rand_hc::Hc128Rng;
+    use rand_isaac::Isaac64Rng;
+    use rand_seeder::rand_core::SeedableRng;
 
     const LETTERS_CHARSET: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
     const U_LETTERS_CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -13,7 +16,8 @@ pub mod gen_engine {
 
     impl Generator {
         pub fn generate_pass(&mut self) -> String {
-            let mut rng = rand::thread_rng();
+            let mut isaac_seeder = Isaac64Rng::from_entropy();
+            let mut rng = Hc128Rng::from_rng(&mut isaac_seeder).unwrap();
             let mut pass_assembly: Vec<&[u8]> = Vec::new();
 
             if self.convenience_criterion
