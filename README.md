@@ -11,12 +11,19 @@ Cross-platform gui-tool (emilk/egui) for generating cryptographically secure pas
 
 [CSPRNGs](https://rust-random.github.io/book/guide-rngs.html#cryptographically-secure-pseudo-random-number-generators-csprngs) Isaac64Rng and Hc128Rng are used.
 
-![alt text](./App_screen.png "passgen-console-linuxwin")
-
-
+![alt text](./passgen-desktop_demo.gif "passgen-desktop_demo.gif")
 
 [Releases/Builded packages](https://github.com/mammothcoding/passgen-desktop/releases/)
 
 ### License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+### Our other passgen projects:
+[passgen-lib](https://github.com/mammothcoding/passgen-lib)
+
+[passgen-cmd](https://github.com/mammothcoding/passgen-cmd)
+
+[passgen-console-linuxwin](https://github.com/mammothcoding/passgen-console-linuxwin)
+
+[passgen-telegram](https://github.com/mammothcoding/passgen-telegram)
